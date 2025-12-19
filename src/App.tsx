@@ -1,8 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { SunIcon, MoonIcon, Bars3Icon, XMarkIcon, ArrowRightIcon, SparklesIcon, CodeBracketIcon, DevicePhoneMobileIcon } from '@heroicons/react/24/outline';
+import { useState, useEffect  } from 'react';
+import type { ReactNode, ButtonHTMLAttributes  } from 'react';
+import { SunIcon, MoonIcon, Bars3Icon, XMarkIcon, ArrowRightIcon, SparklesIcon, CodeBracketIcon, DevicePhoneMobileIcon, PhoneArrowDownLeftIcon } from '@heroicons/react/24/outline';
+
+type ButtonVariant = 'primary' | 'secondary' | 'outline';
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+  variant?: ButtonVariant;
+  className?: string;
+  icon?: ReactNode;
+}
 
 // Button Component
-const Button = ({ children, variant = 'primary', className = '', icon, ...props }) => {
+const Button = ({ children, variant = 'primary', className = '', icon, ...props }: ButtonProps) => {
   const baseStyles = 'px-6 py-3 rounded-xl font-semibold transition-all duration-300 inline-flex items-center justify-center gap-2';
   const variants = {
     primary: 'bg-gradient-to-r from-[#3E1444] to-[#5a1f63] hover:from-[#5a1f63] hover:to-[#3E1444] text-white shadow-lg hover:shadow-2xl hover:scale-105',
@@ -18,8 +28,13 @@ const Button = ({ children, variant = 'primary', className = '', icon, ...props 
   );
 };
 
+interface SectionProps {
+  children: ReactNode;
+  className?: string;
+  id?: string;
+}
 // Section Component
-const Section = ({ children, className = '', id = '' }) => {
+const Section = ({ children, className = '', id = '' }: SectionProps) => {
   return (
     <section id={id} className={`py-24 px-4 sm:px-6 lg:px-8 ${className}`}>
       <div className="max-w-7xl mx-auto">
@@ -29,8 +44,14 @@ const Section = ({ children, className = '', id = '' }) => {
   );
 };
 
+interface CardProps {
+  children: ReactNode;
+  className?: string;
+  hover?: boolean;
+}
+
 // Card Component
-const Card = ({ children, className = '', hover = true }) => {
+const Card = ({ children, className = '', hover = true }: CardProps) => {
   return (
     <div className={`bg-white dark:bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 ${hover ? 'hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:border-[#3E1444]/30 dark:hover:border-[#d4a5ff]/30' : ''} ${className}`}>
       {children}
@@ -38,8 +59,12 @@ const Card = ({ children, className = '', hover = true }) => {
   );
 };
 
+interface HeaderProps {
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
 // Header Component
-const Header = ({ darkMode, setDarkMode }) => {
+const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -177,7 +202,7 @@ const Hero = () => {
           <Button variant="primary" icon={<ArrowRightIcon className="w-5 h-5" />}>
             View Our Work
           </Button>
-          <Button variant="outline">Contact Us</Button>
+          <Button variant="outline" icon={<PhoneArrowDownLeftIcon className='w-5 h-5'/>}>Contact Us</Button>
         </div>
 
         {/* Floating cards */}
