@@ -59,7 +59,8 @@ It serves as both our **company portfolio** and a **foundation** for future publ
 
 ```bash
 npm install
+```
+
 Run locally
-bash
-Copy code
+```bash
 npm run dev
